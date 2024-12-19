@@ -42,6 +42,16 @@ class JsonResponseController extends Controller
         // return redirect()->route('admin.book-borrowers.index');
     }
 
+    
+    public function bookReturn($id)
+    {
+        $book = BookUser::find($id);
+
+        $book->where('id', $id)->update(['status' => 4]);
+
+        return response()->json(['message' => 'Berhasil menyetujui pengembalian']);
+    }
+
     public function notApproveBookBorrower($id)
     {
         $book = BookUser::find($id);

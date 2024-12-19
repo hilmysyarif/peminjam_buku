@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use App\BookUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 
-class BookBorrowerHistoryController extends Controller
+class UserHistoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class BookBorrowerHistoryController extends Controller
      */
     public function index()
     {
-        $book_users = BookUser::where('status', 1)->orWhere('status', 3)->orWhere('status', 4)->get();
-        return view('admin.book-borrowers-history.index', compact('book_users'));
+        $my_books = User::where('role_id', 3)->get();
+        return view('admin.user-history.index', compact('my_books'));
     }
 
     /**
@@ -49,9 +49,6 @@ class BookBorrowerHistoryController extends Controller
      */
     public function show($id)
     {
-        $book_user = BookUser::find($id);
-
-        return view('admin.book-borrowers-history.show', compact('book_user'));
     }
 
     /**

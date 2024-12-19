@@ -86,7 +86,7 @@
             <div class="col-lg-12">
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="cancel-button" data-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-primary" id="create-user-button">Tambah Pengguna</button>
+                <button type="submit" class="btn btn-primary" id="create-user-button">Tambah Siswa</button>
               </div>
             </div>
           </div>

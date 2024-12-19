@@ -23,7 +23,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::resource('/book-types', 'Admin\BookTypeController');
     Route::resource('/books', 'Admin\BookController');
     Route::resource('/book-borrowers', 'Admin\BookUserController');
+    Route::resource('/book-return', 'Admin\BookReturnController');
     Route::resource('/book-borrowers-history', 'Admin\BookBorrowerHistoryController');
+    Route::resource('/users-history', 'Admin\UserHistoryController');
+
 
     // Detail book on JSON
     Route::get('/book-json/{id}', 'Admin\JsonResponseController@detailBook')->name('json-book.show');
@@ -34,20 +37,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     // Book borrower approved button
     Route::put('/book-approved/{id}', 'Admin\JsonResponseController@approvedBookBorrower')->name('json-book.approved');
 
+    // Book return approved button
+    Route::put('/book-returned/{id}', 'Admin\JsonResponseController@bookReturn')->name('json-book.return');
+
     // Book borrower not approve button
     Route::put('/book-not-approved/{id}', 'Admin\JsonResponseController@notApproveBookBorrower')->name('json-book.not-approved');
-});
-
-Route::group(['prefix' => 'anggota', 'as' => 'anggota.', 'middleware' => ['auth']], function () {
-    Route::get('/dashboard', 'Anggota\DashboardController@index')->name('dashboard.index');
-
-    // Menu
-    Route::resource('/book-borrowers-history', 'Anggota\BookBorrowerHistoryController');
-
-    // Store JSON
-    Route::post('/book-borrowers-json', 'Anggota\JsonResponseController@store')->name('json-book-borrowers.store');
-
-    Route::resource('/book-borrow', 'Anggota\BookBorrowController');
 });
 
 Auth::routes(['register' => false]);

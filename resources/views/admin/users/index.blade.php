@@ -1,4 +1,4 @@
-@extends('layouts.stisla.index', ['title' => 'Daftar Pengguna', 'section_header' => 'Daftar Pengguna'])
+@extends('layouts.stisla.index', ['title' => 'Daftar Siswa', 'section_header' => 'Daftar Siswa'])
 
 @section('content')
 <div class="row">
@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-lg-12 px-3 py-3 text-right">
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-user-modal">
-            Tambah Pengguna
+            Tambah Siswa
           </button>
         </div>
       </div>

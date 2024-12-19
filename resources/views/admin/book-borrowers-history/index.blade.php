@@ -1,4 +1,4 @@
-@extends('layouts.stisla.index', ['title' => 'Histori Peminjaman Buku', 'section_header' => 'Histori Peminjaman Buku'])
+@extends('layouts.stisla.index', ['title' => 'Report Peminjaman Buku', 'section_header' => 'Report Peminjaman Buku'])
 
 @section('content')
 <div class="row">
@@ -21,10 +21,15 @@
             <td>{{ $loop->iteration }}</td>
             <td>{{ $book_user->user->name }}</td>
             <td>{{ Str::limit($book_user->book->title, '40', '...') }}</td>
+
             @if($book_user->status === 1)
-            <td class="badge badge-pill badge-success shadow-sm my-2" data-toggle="tooltip" data-placement="top" title="Disetujui">Disetujui</td>
+              <td class="badge badge-pill badge-success shadow-sm my-2" data-toggle="tooltip" data-placement="top" title="Disetujui">Disetujui</td>
+            @elseif($book_user->status === 2)
+              <td class="badge badge-pill badge-warning shadow-sm my-2" data-toggle="tooltip" data-placement="top" title="Disetujui">Belum disetujui</td>
+            @elseif($book_user->status === 3)
+              <td class="badge badge-pill badge-danger shadow-sm my-2" data-toggle="tooltip" data-placement="top" title="Disetujui">Tidak disetujui</td>
             @else
-            <td class="badge badge-pill badge-danger shadow-sm my-2" data-toggle="tooltip" data-placement="top" title="Tidak disetujui">Tidak disetujui</td>
+              <td class="badge badge-pill badge-success shadow-sm my-2" data-toggle="tooltip" data-placement="top" title="Disetujui">Dikembalikan</td>
             @endif
             <td>{{ date_format(date_create($book_user->updated_at), 'd-m-Y, H:i') }}</td>
             <td>

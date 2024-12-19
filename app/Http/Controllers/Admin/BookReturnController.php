@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Book;
 use App\BookUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use App\User;
 
-class BookBorrowerHistoryController extends Controller
+class BookReturnController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,11 @@ class BookBorrowerHistoryController extends Controller
      */
     public function index()
     {
-        $book_users = BookUser::where('status', 1)->orWhere('status', 3)->orWhere('status', 4)->get();
-        return view('admin.book-borrowers-history.index', compact('book_users'));
+        $book_users = BookUser::where('status', 1)->get();
+        $books = Book::all();
+        $users = User::all();
+
+        return view('admin.book-return.index', compact('book_users', 'books', 'users'));
     }
 
     /**
@@ -38,7 +42,16 @@ class BookBorrowerHistoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book_user = new BookUser();
+        $book_user->user_id = $request->user_id;
+        $book_user->book_id = $request->book_id;
+        $book_user->date_start = $request->date_start;
+        $book_user->date_end = $request->date_end;
+        $book_user->notes = $request->notes;
+        $book_user->status = 1;
+        $book_user->save();
+
+        return response()->json(['data' => $book_user]);
     }
 
     /**
@@ -51,7 +64,7 @@ class BookBorrowerHistoryController extends Controller
     {
         $book_user = BookUser::find($id);
 
-        return view('admin.book-borrowers-history.show', compact('book_user'));
+        return view('admin.book-return.show', compact('book_user'));
     }
 
     /**
@@ -74,7 +87,7 @@ class BookBorrowerHistoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // 
     }
 
     /**
