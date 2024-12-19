@@ -45,7 +45,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            if (auth()->user()->role_id === 1 || auth()->user()->id === 2) {
+            if (auth()->user()->role_id === 1) {
                 User::where('id', auth()->user()->id)->update(['status' => 1]);
                 $this->saveUserLoginLog(auth()->user()->id, $request->getClientIp());
 
@@ -54,7 +54,7 @@ class LoginController extends Controller
                 User::where('id', auth()->user()->id)->update(['status' => 1]);
                 $this->saveUserLoginLog(auth()->user()->id, $request->getClientIp());
 
-                return redirect()->route('anggota.dashboard.index');
+                return redirect()->route('admin.dashboard.index');
             }
         }
         $this->incrementLoginAttempts($request);

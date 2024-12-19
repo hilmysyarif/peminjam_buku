@@ -1,6 +1,5 @@
 <div class="main-sidebar">
   <aside id="sidebar-wrapper">
-    @if(auth()->user()->id === 1 || auth()->user()->id === 2)
     <div class="sidebar-brand">
       <a href="{{ route('admin.dashboard.index') }}">Peminjaman Buku</a>
     </div>
@@ -47,32 +46,7 @@
             <a class="nav-link" href="{{ route('admin.users-history.index') }}">Report Data Siswa</a>
           </li>
         </ul>
-      </li>
-      @else
-      <div class="sidebar-brand">
-        <a href="{{ route('anggota.dashboard.index') }}">Stisla</a>
-      </div>
-      <div class="sidebar-brand sidebar-brand-sm">
-        <a href="{{ route('anggota.dashboard.index') }}">St</a>
-      </div>
-      <ul class="sidebar-menu">
-        <li class="{{ Request::segment(2) === 'dashboard' ? 'active' : '' }}">
-          <a class="nav-link" href="{{ route('anggota.dashboard.index') }}"><i class="fas fa-fire"></i>
-            <span>Dashboard</span></a>
-        </li>
-
-        <li class="menu-header">Menu</li>
-        <li
-          class="nav-item dropdown {{ (Request::segment(2) === 'book-borrowers' ? 'active' : '') || Request::segment(2) === 'book-borrowers-history' ? 'active' : '' }}">
-          <a href="#" class="nav-link has-dropdown"><i class="fas fa-book-reader"></i> <span>Peminjaman</span></a>
-          <ul class="dropdown-menu">
-            <li class="{{ Request::segment(2) === 'book-borrowers-history' ? 'active' : '' }}">
-              <a class="nav-link" href="{{ route('anggota.book-borrowers-history.index') }}">Histori Peminjaman Buku</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      @endif
+      </li>   
     </ul>
 
   </aside>
