@@ -16,7 +16,7 @@ class BookBorrowerHistoryController extends Controller
      */
     public function index()
     {
-        $book_users = BookUser::where('status', 1)->orWhere('status', 3)->orWhere('status', 4)->get();
+        $book_users = BookUser::where('status', 1)->orWhere('status', 3)->orWhere('status', 4)->orderBy('created_at', 'DESC')->get();
         return view('admin.book-borrowers-history.index', compact('book_users'));
     }
 

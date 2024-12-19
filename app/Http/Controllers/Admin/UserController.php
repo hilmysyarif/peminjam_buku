@@ -32,7 +32,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('role_id', 3)->get();
+        $users = User::where('role_id', 3)->orderBy('created_at', 'DESC')->get();
         $roles = Role::where('id', 3)->get();
         return view('admin.users.index', compact('users', 'roles'));
     }

@@ -30,7 +30,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
+        $books = Book::orderBy('created_at', 'DESC')->get();
         $book_types = BookType::all();
         return view('admin.books.index', compact('books', 'book_types'));
     }

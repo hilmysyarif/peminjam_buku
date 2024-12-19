@@ -17,7 +17,7 @@ class BookUserController extends Controller
      */
     public function index()
     {
-        $book_users = BookUser::where('status', 2)->get();
+        $book_users = BookUser::where('status', 2)->orderBy('created_at', 'DESC')->get();
         $books = Book::all();
         $users = User::all();
 

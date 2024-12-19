@@ -16,7 +16,7 @@ class UserHistoryController extends Controller
      */
     public function index()
     {
-        $my_books = User::where('role_id', 3)->get();
+        $my_books = User::where('role_id', 3)->orderBy('created_at', 'DESC')->get();
         return view('admin.user-history.index', compact('my_books'));
     }
 
