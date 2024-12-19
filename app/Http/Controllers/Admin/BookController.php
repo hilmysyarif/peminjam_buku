@@ -54,19 +54,25 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $image = $request->file('image');
-        $location = 'assets/images/books/';
+        if(empty($image))
+        {
+            return response()->json(['data' => ['message' => 'Maaf, Buku tidak dapat ditambahkan, karena tidak upload Foto.']], 400);
+        }else{
 
-        $book = new Book();
-        $book->book_type_id = $request->book_type_id;
-        $book->book_number = 'BUKU-' . rand(10, 90) . rand(101, 199) . rand(200, 999);
-        $book->image = $this->helpers->imageUpload($image, $location);
-        $book->title = $request->title;
-        $book->publisher = $request->publisher;
-        $book->date_of_added = $request->date_of_added;
-        $book->languages = $request->languages;
-        $book->save();
+            $location = 'assets/images/books/';
 
-        return redirect()->route('admin.books.index');
+            $book = new Book();
+            $book->book_type_id = $request->book_type_id;
+            $book->book_number = 'BUKU-' . rand(10, 90) . rand(101, 199) . rand(200, 999);
+            $book->image = $this->helpers->imageUpload($image, $location);
+            $book->title = $request->title;
+            $book->publisher = $request->publisher;
+            $book->date_of_added = $request->date_of_added;
+            $book->languages = $request->languages;
+            $book->save();
+    
+            return redirect()->route('admin.books.index');
+        }
     }
 
     /**

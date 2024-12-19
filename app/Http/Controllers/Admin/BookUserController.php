@@ -42,16 +42,30 @@ class BookUserController extends Controller
      */
     public function store(Request $request)
     {
-        $book_user = new BookUser();
-        $book_user->user_id = $request->user_id;
-        $book_user->book_id = $request->book_id;
-        $book_user->date_start = $request->date_start;
-        $book_user->date_end = $request->date_end;
-        $book_user->notes = $request->notes;
-        $book_user->status = 2;
-        $book_user->save();
+        /**
+         * Check periode date with book_id and status
+         */
+        $borrowed_book = Book::where('id', $request->book_id)->where('status', 1)->get();
 
-        return response()->json(['data' => $book_user]);
+        if(count($borrowed_book) > 0)
+        {
+            return response()->json(['data' => ['message' => 'Maaf, Buku ini tidak dapat dipinjam.']], 400);
+        }else{
+            $book_user = new BookUser();
+            $book_user->user_id = $request->user_id;
+            $book_user->book_id = $request->book_id;
+            $book_user->date_start = $request->date_start;
+            $book_user->date_end = $request->date_end;
+            $book_user->notes = $request->notes;
+            $book_user->status = 2;
+            $book_user->save();
+
+            $borrowed_book = Book::where('id', $request->book_id)->first();
+            $borrowed_book->status = 1;
+            $borrowed_book->save();
+    
+            return response()->json(['data' => $book_user]);
+        }
     }
 
     /**

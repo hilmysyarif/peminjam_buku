@@ -56,8 +56,10 @@
     </div>
     <div class="py-4">
       <a href="{{ route('admin.book-borrowers.index') }}" class="btn btn-primary">Kembali</a>
-      <button type="submit" class="btn btn-success" data-id="{{ $book_user->id }}" id="book-approved-button">Setujui</button>
-      <button type="submit" class="btn btn-danger" data-id="{{ $book_user->id }}" id="book-not-approved-button">Tidak menyetujui</button>
+      @if($book_user->status === 2)
+        <button type="submit" class="btn btn-success" data-id="{{ $book_user->id }}" id="book-approved-button">Setujui</button>
+        <button type="submit" class="btn btn-danger" data-id="{{ $book_user->id }}" id="book-not-approved-button">Tidak menyetujui</button>
+      @endif
     </div>
 
     </form>

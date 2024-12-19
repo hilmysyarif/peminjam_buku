@@ -4,10 +4,6 @@
 <div class="row">
   <div class="col-lg-12 table-responsive">
     <div class="card px-3 py-3">
-      <div class="row">
-        <div class="col-lg-12 px-3 py-3 text-right">
-        </div>
-      </div>
       <table class="table table-hovered text-center table-bordered" id="datatable">
         <thead>
           <tr>
@@ -40,11 +36,3 @@
   </div>
 </div>
 @endsection
-
-@push('modal')
-@include('admin.book-borrowers.modal.book.create')
-@endpush
-
-@push('js')
-@include('admin.book-borrowers._script')
-@endpush

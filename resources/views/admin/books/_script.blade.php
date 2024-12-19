@@ -3,6 +3,8 @@
         flatpickr("#date_of_added_create", {});
 
         $("#create-book-button").click(function(e) {
+            e.preventDefault();
+
             let token = $("input[name=_token]").val();
             let book_type_id = $("#book_type_id_create").val();
             let title = $("#title_create").val();
@@ -26,16 +28,16 @@
                         icon: "success",
                         timerProgressBar: true,
                         onBeforeOpen: () => {
-                            Swal.showLoading();
-                            timerInterval = setInterval(() => {
-                                const content = Swal.getContent();
-                                if (content) {
-                                    const b = content.querySelector("b");
-                                    if (b) {
-                                        b.textContent = Swal.getTimerLeft();
-                                    }
-                                }
-                            }, 100);
+                        Swal.showLoading();
+                        timerInterval = setInterval(() => {
+                            const content = Swal.getContent();
+                            if (content) {
+                            const b = content.querySelector("b");
+                            if (b) {
+                                b.textContent = Swal.getTimerLeft();
+                            }
+                            }
+                        }, 100);
                         },
                         showConfirmButton: false
                     });
@@ -44,29 +46,14 @@
                     }, 500)
                 },
                 error: function(data) {
-                    Swal.fire({
-                        title: "Berhasil",
-                        text: "Data berhasil ditambahkan.",
-                        icon: "success",
-                        timerProgressBar: true,
-                        onBeforeOpen: () => {
-                            Swal.showLoading();
-                            timerInterval = setInterval(() => {
-                                const content = Swal.getContent();
-                                if (content) {
-                                    const b = content.querySelector("b");
-                                    if (b) {
-                                        b.textContent = Swal.getTimerLeft();
-                                    }
-                                }
-                            }, 100);
-                        },
-                        showConfirmButton: false
-                    });
-                    setTimeout(function() {
-                        location.reload();
-                    }, 500)
-                }
+                    if(data.status == 400)
+                    {
+                        Swal.fire("Gagal!", data.responseJSON.data.message, "warning");
+                        return false;
+                    }else{
+                        Swal.fire("Gagal!", "Data gagal ditambahkan.", "warning");
+                    }
+                },
             })
         });
 

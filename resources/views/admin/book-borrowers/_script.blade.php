@@ -24,6 +24,7 @@
           notes: notes
         },
         success: function(data) {
+          console.log(data);
           Swal.fire({
             title: "Berhasil",
             text: "Data berhasil ditambahkan.",
@@ -48,8 +49,12 @@
           }, 500)
         },
         error: function(data) {
-          console.log(data);
-          Swal.fire("Gagal!", "Data gagal ditambahkan.", "warning");
+          if(data.status == 400)
+          {
+            Swal.fire("Gagal!", data.responseJSON.data.message, "warning");
+          }else{
+            Swal.fire("Gagal!", "Data gagal ditambahkan.", "warning");
+          }
         }
       });
     });
