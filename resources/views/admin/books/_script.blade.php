@@ -19,7 +19,8 @@
                     book_type_id: book_type_id,
                     title: title,
                     publisher: publisher,
-                    languages: languages
+                    languages: languages,
+                    images: $('#image_preview').attr('src')
                 },
                 success: function(data) {
                     Swal.fire({

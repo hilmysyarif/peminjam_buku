@@ -53,7 +53,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $image = $request->file('image');
+        $image = $request->images;
         if(empty($image))
         {
             return response()->json(['data' => ['message' => 'Maaf, Buku tidak dapat ditambahkan, karena tidak upload Foto.']], 400);
@@ -67,7 +67,7 @@ class BookController extends Controller
             $book->image = $this->helpers->imageUpload($image, $location);
             $book->title = $request->title;
             $book->publisher = $request->publisher;
-            $book->date_of_added = $request->date_of_added;
+            $book->date_of_added = date('Y-m-d');
             $book->languages = $request->languages;
             $book->save();
     
@@ -111,7 +111,7 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $image = $request->file('image');
+        $image = $request->images;
         $location = 'assets/images/books/';
         $book = Book::find($id);
 

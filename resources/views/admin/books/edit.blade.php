@@ -105,7 +105,8 @@
           title: title,
           publisher: publisher,
           date_of_added: date_of_added,
-          languages: languages
+          languages: languages,
+          images: $('#image_preview').attr('src')
         },
         success: function(data) {
           Swal.fire({
